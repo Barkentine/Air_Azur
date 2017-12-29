@@ -18,7 +18,7 @@
         case 'accueil':
             include("View/v_homepage.php");
             break;
-        case 'vols'
+        case 'vols':
             include("View/v_vols.php");
             break;
         default:
