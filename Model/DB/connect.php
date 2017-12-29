@@ -1,37 +1,42 @@
 <?php header('Content-type: text/html; charset=utf-8');?>
 <?php
 /**
- * Classe implémentant le singleton pour PDO
- * @author Savageman modifié par Moi
+ * Generic Singleton class.
+ * @author Moi
 **/
 
-class PDO2bis extends PDO
+class connect
 {
-    private static $db_config = array();
-   /* private static $db_config['SGBD']     = 'mysql';
-    private static $db_config['HOST']     = 'localhost';
-    private static $db_config['DB_NAME']  = 'airazur';
-    private static $db_config['USER']     = 'root';
-    private static $db_config['PASSWORD'] = '';
-    private static $db_config['CHARSET']  = 'utf8mb4';
-    private static $db_config['OPTIONS']  = array
-    (
-        // Activation des exceptions PDO :
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        // Change le fetch mode par défaut sur FETCH_ASSOC ( fetch() retournera un tableau associatif ) :
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-    );*/
+    private static $_instance = null;
+    private $conn;
 
-
-    /* Constructeur : héritage public obligatoire par héritage de PDO */
+    // Constructor
     final private function __construct()
     {
+        // Do not forget to edit the config.inc.php file with the good parameters.
+        require_once 'config.inc.php';
+        try
+        {
+            $this->_instance = new PDO($SGBD.':host='.$HOST.';dbname='.$DB_NAME.';charset='.$CHARSET,
+                          $USER,
+                          $PASSWORD.';');
+            echo 'Connected to database'; // echo a message saying we have connected. Comment once all is working.
+        }
+        catch (Exception $e)
+        {
+            die('Erreur : '.$e->getMessage());
+        }
     }
-    // End of PDO2::__construct() */
 
     final public function __clone()
     {
-        trigger_error("Le clonage n'est pas autorisé.", E_USER_ERROR);
+        throw new Exception("Can not clone a singleton");
+    }
+
+    final public function __destruct()
+    {
+        self::$_instance->_connection->close();
+        // self::$_instance = null;
     }
 
     /* Singleton */
@@ -41,18 +46,19 @@ class PDO2bis extends PDO
         {
             try
             {
-                self::$_instance = new PDO(SQL_DSN, SQL_USERNAME, SQL_PASSWORD, SQL_CHARSET);
+                self::$_instance = new Singleton();
             }
             catch (PDOException $e)
             {
                 echo $e;
             }
-            /*finally
-            {
-                self::$_instance -> closeCursor();
-            }*/
         }
-        return self::$_instance; 
+        return self::$_instance;
+    }
+
+    public function query($query)
+    {
+      return $this->PDOInstance->query($query);
     }
 }
 
