@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="container">
-    <nav class="navbar navbar-expand-sm bg-light fixed-top">
+    <nav class="navbar navbar-expand-sm bg-light">
     <a class="navbar-brand" href="#">Air Azur</a>
         <ul class="navbar-nav">
             <li class="nav-item">
