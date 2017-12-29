@@ -1,6 +1,8 @@
 <?php header('Content-Type: text/html; charset=utf-8'); ?>
 
 <?php
+    include("View/v_header.php");
+
     if(!isset($_REQUEST['action']))
     {
         $action = 'accueil';
@@ -10,12 +12,12 @@
         $action = $_REQUEST['action'];
     }
     switch ($action) {
+        //case 'value':
         case 'value':
-            include("view/v_header.php");
             break;
         default:
             break;
     }
-    include("view/v_footer.php") ;
+    include("View/v_footer.php") ;
 ?>
 
