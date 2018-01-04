@@ -6,8 +6,8 @@
 **/
 class CRUD
 {
-    public function read()
-    {
-        
-    }
+	public function read()
+	{
+
+	}
 }
