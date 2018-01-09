@@ -17,7 +17,7 @@ class connect
 		require_once 'config.inc.php';
 		try
 		{
-			$this->_instance = new PDO($SGBD.':host='.$HOST.';dbname='.$DB_NAME.';charset='.$CHARSET,
+			self::$_instance = new PDO($SGBD.':host='.$HOST.';dbname='.$DB_NAME.';charset='.$CHARSET,
 						$USER,
 						$PASSWORD.';');
 			echo 'Connected to database'; // echo a message saying we have connected. Comment once all is working.
@@ -56,9 +56,9 @@ class connect
 		return self::$_instance;
 	}
 
-	public function query($query)
+	public function query($req)
 	{
-		return $this->PDOInstance->query($query);
+		return self::$_instance->query($req);
 	}
 }
 
