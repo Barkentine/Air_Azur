@@ -17,9 +17,9 @@
 	while($row = $TousLesVols->fetch(PDO::FETCH_OBJ))
 			/*<option value='<?php $row->bookID ?>'><?php $row->bookTitle ?></option>*/
 	{?>
-	<td><<?php $row->numeroVol ?>/td> <?php // Check if all labels are good. ?>
-		<td><<?php $row->departVol ?>/td>
-		<td><<?php $row->arriveeVol ?>/td>
+	<td><?php $row->numeroVol ?></td> <?php // Check if all labels are good. ?>
+		<td><?php $row->departVol ?></td>
+		<td><?php $row->arriveeVol ?></td>
 <?php } ?>
 	</tr>
 	</table>
