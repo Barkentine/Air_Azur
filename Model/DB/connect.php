@@ -19,7 +19,7 @@ class connect
 		{
 			self::$_instance = new PDO($SGBD.':host='.$HOST.';dbname='.$DB_NAME.';charset='.$CHARSET,
 						$USER,
-						$PASSWORD.';');
+						$PASSWORD.'');
 			echo 'Connected to database'; // echo a message saying we have connected. Comment once all is working.
 		}
 		catch (Exception $e)
